@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RouletteBall : MonoBehaviour,IRouletteeble
+public class Ball : MonoBehaviour,IRouletteeble
 {
     private int _probability;
     
