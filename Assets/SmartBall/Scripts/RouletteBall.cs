@@ -1,26 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Video;
 
-public class Ball : MonoBehaviour,IRouletteeble
+public class RouletteBall : MonoBehaviour
 {
-    private int _probability;
-    
-    
-    public void RouletStart()
+    private void OnTriggerEnter(Collider other)
     {
-        if (Probability.RouletteProbability(30))
+        if (other.TryGetComponent(out IRouletteeble roulette))
         {
-            Debug.Log("30%が起こった");
+            roulette.RouletStart();
         }
-        else if (Probability.RouletteProbability(50))
-        {
-            Debug.Log("50%が起こった");
-        }
-        else
-        {
-            Debug.Log("はずれ");
-        }
-        Debug.Log("ルーレット開始");
     }
 }
