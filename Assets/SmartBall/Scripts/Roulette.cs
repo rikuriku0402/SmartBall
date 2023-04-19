@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Video;
 
 public class Roulette : MonoBehaviour,IRouletteeble
 {
@@ -10,34 +9,28 @@ public class Roulette : MonoBehaviour,IRouletteeble
     [Header("はずれやリーチやあたりの動画が入ってるクラス")]
     private Video _video;
     
+    [SerializeField]
+    [Header("ゲートタイプ")]
+    private GateEnum _type;
+    
+    private enum GateEnum
+    {
+        Lottery,
+        NormalHit
+    }
+    
     public void RouletStart()
     {
-        Debug.Log("ルーレット開始");
-        
-        if (Probability.RouletteProbability(10))
+        switch (_type)
         {
-            Debug.Log("リーチ");
-            try
-            {
-                _video.Reach();
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                Debug.LogError("ビデオが入ってない");
-            }
+           case GateEnum.Lottery: 
+               _video.Lottery();
+               break;
+           
+           case GateEnum.NormalHit:
+               _video.NormalHit();
+               break;
         }
-        else
-        {
-            Debug.Log("はずれが流れてる");
-            try
-            {
-                _video.NormalTime();
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                Debug.LogError("ビデオが入ってない");
-            }
-        }
-        
+        Debug.Log("当たり");
     }
 }

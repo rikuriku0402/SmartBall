@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class BallGenerator : MonoBehaviour
@@ -13,9 +14,10 @@ public class BallGenerator : MonoBehaviour
     [Header("ボールのプレハブ")]
     private GameObject _ball;
     
+    [FormerlySerializedAs("_bollGeneratePos")]
     [SerializeField]
     [Header("ボール生成位置")]
-    private Transform _bollGeneratePos;
+    private Transform _ballGeneratePos;
     
     void Start()
     {
@@ -24,6 +26,7 @@ public class BallGenerator : MonoBehaviour
 
     private void BallGeneratorButton()
     {
-        Instantiate(_ball,_bollGeneratePos.position,Quaternion.identity);
+        _ball.transform.position = _ballGeneratePos.position;
+        _ball.SetActive(true);
     }
 }

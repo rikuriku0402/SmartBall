@@ -31,10 +31,10 @@ public class Test : MonoBehaviour
         this.m_MainCameraTransform = this.m_MainCamera.transform;
     }
 
-    public void Update()
+    public void FixedUpdate()
     {
         var pos = transform.position;
-
+        
         // x軸方向の移動範囲制限
         pos.y = Mathf.Clamp(pos.y, _minY, _maxY);
         transform.position = pos;

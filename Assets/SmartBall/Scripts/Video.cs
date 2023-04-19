@@ -1,20 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Video;
-using System;
 
 public class Video : MonoBehaviour
 {
-    [SerializeField]
-    [Header("UIManager")]
-    private UIManager _uiManager;
-    
-    [SerializeField]
-    [Header("通常時のはずれの動画集")]
-    private List<VideoPlayer> _normalTimeVideo;
-    
     [SerializeField]
     [Header("小当たりの動画集")]
     private List<VideoPlayer> _smallHitVideo;
@@ -24,66 +16,82 @@ public class Video : MonoBehaviour
     private List<VideoPlayer> _bigHitVideo;
 
     [SerializeField]
-    [Header("リーチ中の演出動画")]
-    private List<VideoPlayer> _reachEffectVideo;
+    [Header("大当たりの確率")]
+    private int _bigHitProbability;
     
     [SerializeField]
-    [Header("リーチ中のはずれ動画集")]
-    private List<VideoPlayer> _reachMissVideo;
-
+    [Header("当たった時に操作の受付を拒否するためのイメージ")]
+    private Image _operationIgnoreImage;
+    
+    [SerializeField]
+    [Header("当たった時にスコアを出すテキスト")]
+    private TextMeshProUGUI _scoreText;
+    
+    [SerializeField]
+    [Header("ScoreManager")]
+    private ScoreManager _scoreManager;
+    
+    [SerializeField]
+    [Header("ボールを生成するクラス")]
+    private GetBall _getBall;
+    
     private int _listNumber;
     
-    public void Reach()
-    {
-        _listNumber = UnityEngine.Random.Range(0,_smallHitVideo.Count);
-
-        if (Probability.RouletteProbability(75))
-        {
-            _smallHitVideo[_listNumber].Play();
-        }
-        else if (Probability.RouletteProbability(30))
-        {
-            _bigHitVideo[_listNumber].Play();
-        }
-                
-    }
     
-    public async void NormalTime()
+    public void Lottery()
     {
-        _uiManager.RouletteHold();
-        await RouletteFlow();
-        _uiManager.RouletteHoldConsumption();
-    }
-
-    private void ReachEffect(VideoPlayer vp)
-    {
-        if (Probability.RouletteProbability(75))
-        {
-            Debug.Log("はずれの動画");
-            ReachMiss();
-        }
-        else if (Probability.RouletteProbability(20))
-        {
-            Debug.Log("あたり");
-            _reachEffectVideo[_listNumber].Play();
-        }
-    }
-
-    private void ReachMiss()
-    {
-        _reachMissVideo[_listNumber].Play();
-    }
-    
-    private async UniTask RouletteFlow()
-    {
-        var miss = UnityEngine.Random.Range(0,_normalTimeVideo.Count);
-        _normalTimeVideo[miss].Play();
-        await UniTask.Delay(TimeSpan.FromSeconds(_normalTimeVideo[miss].clip.length));
+        _operationIgnoreImage.gameObject.SetActive(true);
         
-        if (_uiManager.RouletteHoldNumberNumber > 0)
+        if (Probability.RouletteProbability(_bigHitProbability))
         {
-            Debug.Log("保留あり");
-            await RouletteFlow();
+            _listNumber = Random.Range(0,_bigHitVideo.Count);
+            Debug.Log("大当たり");
+            _bigHitVideo[_listNumber].loopPointReached += ImageActiveTure;
+            _bigHitVideo[_listNumber].Play();
+            _scoreManager.GetScore(100);
+            _scoreText.text = _scoreManager.AllScore.ToString();
+            // BallInstantiate();
         }
+        else
+        {
+            _listNumber = Random.Range(0,_smallHitVideo.Count);
+            Debug.Log("小当たり");
+            _smallHitVideo[_listNumber].loopPointReached += ImageActiveTure;
+            _smallHitVideo[_listNumber].Play();
+            _scoreManager.GetScore(50);            
+            _scoreText.text = _scoreManager.AllScore.ToString();
+            // BallInstantiate();
+        }
+    }
+
+    public void NormalHit()
+    {
+        _operationIgnoreImage.gameObject.SetActive(true);
+        _listNumber = Random.Range(0,_smallHitVideo.Count);
+        Debug.Log("固定当たり");
+        _smallHitVideo[_listNumber].loopPointReached += ImageActiveTure;
+        _smallHitVideo[_listNumber].Play();
+        _scoreManager.GetScore(15);            
+        _scoreText.text = _scoreManager.AllScore.ToString();
+    }
+
+    /// <summary>
+    /// ボールを生成する関数
+    /// </summary>
+    private void BallInstantiate()
+    {
+        for (int i = 0; i < _scoreManager.AllScore; i++)
+        {
+            _getBall.RandomPositionInstantiate();
+        }
+    }
+
+    /// <summary>
+    /// VideoPlayerの再生が終わった後に呼ばれる
+    /// </summary>
+    /// <param name="vp"></param>
+    private void ImageActiveTure(VideoPlayer vp)
+    {
+        _operationIgnoreImage.gameObject.SetActive(false);
     }
 }

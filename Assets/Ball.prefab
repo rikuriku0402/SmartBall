@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 7160468784925168727}
   - component: {fileID: 7160468784925168726}
   - component: {fileID: 7160468784925168721}
-  - component: {fileID: 7160468784925168682}
   - component: {fileID: 1329058676522485323}
+  - component: {fileID: 8090014571818684005}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Untagged
@@ -30,9 +30,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7160468784925168720}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.11, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 4.45, y: 1, z: 0}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -65,7 +65,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 456f58caf0544be43a92fc06de305c15, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -114,22 +114,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 120
+  m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &7160468784925168682
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7160468784925168720}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e2381005162b4b49a5c857bf5c8b3d0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _minY: 0
-  _maxY: 10
 --- !u!114 &1329058676522485323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,6 +125,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 7160468784925168720}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bec1f87dc755a45c380c35f187354edf, type: 3}
+  m_Script: {fileID: 11500000, guid: 0b97c0943963f4e72a663c09164122a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minY: -3
+  _maxY: 20
+--- !u!114 &8090014571818684005
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7160468784925168720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a685c8cefa21a546ac9b4d21b399911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
