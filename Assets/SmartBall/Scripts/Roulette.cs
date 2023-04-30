@@ -1,15 +1,35 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Roulette : MonoBehaviour
+public class Roulette : MonoBehaviour, IRouletteAble
 {
-    private void OnTriggerEnter(Collider other)
+    [SerializeField]
+    [Header("はずれやリーチやあたりの動画が入ってるクラス")]
+    private Video _video;
+    
+    [SerializeField]
+    [Header("ゲートタイプ")]
+    private GateEnum _type;
+    
+    private enum GateEnum
     {
-        if (other.TryGetComponent(out IRouletteeble rouletteeble))
+        Lottery,
+        NormalHit
+    }
+    
+    public void RouletStart()
+    {
+        switch (_type)
         {
-            rouletteeble.RouletStart();
+           case GateEnum.Lottery: 
+               _video.Lottery();
+               break;
+           
+           case GateEnum.NormalHit:
+               _video.NormalHit();
+               break;
         }
+        Debug.Log("当たり");
     }
 }

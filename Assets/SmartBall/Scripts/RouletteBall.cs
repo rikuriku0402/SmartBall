@@ -1,26 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public class RouletteBall : MonoBehaviour,IRouletteeble
+public class RouletteBall : MonoBehaviour
 {
-    private int _probability;
-    
-    
-    public void RouletStart()
+    private async void OnTriggerEnter(Collider other)
     {
-        if (Probability.RouletteProbability(30))
+        if (other.TryGetComponent(out IRouletteAble roulette))
         {
-            Debug.Log("30%が起こった");
+            roulette.RouletStart();
+            // await BallActiveFalse(gameObject);
         }
-        else if (Probability.RouletteProbability(50))
-        {
-            Debug.Log("50%が起こった");
-        }
-        else
-        {
-            Debug.Log("はずれ");
-        }
-        Debug.Log("ルーレット開始");
+    }
+
+    private async UniTask BallActiveFalse(GameObject ball)
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(1f));
+        ball.SetActive(false);
     }
 }

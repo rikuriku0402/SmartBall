@@ -12,7 +12,7 @@ public class Ball : MonoBehaviour
     [SerializeField]
     private float _maxY = 10;
 
-    public void Update()
+    public void FixedUpdate()
     {
         var pos = transform.position;
 

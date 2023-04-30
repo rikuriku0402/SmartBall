@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    private int _allScore;
+    public int AllScore => _allScore;
     
+    private int _allScore;
+
     public void AddScore(int score)
     {
         _allScore += score;
+    }
+    
+    public void GetScore(int score)
+    {
+        _allScore = score;
     }
 
     public void MinusScore(int currentScore)
