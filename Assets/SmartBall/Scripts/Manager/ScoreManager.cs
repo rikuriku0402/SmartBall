@@ -7,6 +7,11 @@ public class ScoreManager : MonoBehaviour
     public int AllScore => _allScore;
     
     private int _allScore;
+
+    public void AddScore(int score)
+    {
+        _allScore += score;
+    }
     
     public void GetScore(int score)
     {

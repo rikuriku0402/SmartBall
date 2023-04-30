@@ -8,10 +8,10 @@ public class RouletteBall : MonoBehaviour
 {
     private async void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out IRouletteeble roulette))
+        if (other.TryGetComponent(out IRouletteAble roulette))
         {
             roulette.RouletStart();
-            await BallActiveFalse(gameObject);
+            // await BallActiveFalse(gameObject);
         }
     }
 

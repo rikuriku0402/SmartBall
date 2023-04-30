@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
@@ -24,16 +23,16 @@ public class Video : MonoBehaviour
     private Image _operationIgnoreImage;
     
     [SerializeField]
-    [Header("当たった時にスコアを出すテキスト")]
-    private TextMeshProUGUI _scoreText;
-    
-    [SerializeField]
     [Header("ScoreManager")]
     private ScoreManager _scoreManager;
     
     [SerializeField]
+    [Header("UIManager")]
+    private UIManager _uiManager;
+    
+    [SerializeField]
     [Header("ボールを生成するクラス")]
-    private GetBall _getBall;
+    private InstantiateBall instantiateBall;
     
     private int _listNumber;
     
@@ -49,8 +48,10 @@ public class Video : MonoBehaviour
             _bigHitVideo[_listNumber].loopPointReached += ImageActiveTure;
             _bigHitVideo[_listNumber].Play();
             _scoreManager.GetScore(100);
-            _scoreText.text = _scoreManager.AllScore.ToString();
-            // BallInstantiate();
+            // _scoreManager.AddScore(100);
+            _uiManager.ScoreText.text = _scoreManager.AllScore.ToString();
+            _uiManager.BigHitText.text = _scoreManager.AllScore.ToString();
+            BallInstantiate();
         }
         else
         {
@@ -58,9 +59,11 @@ public class Video : MonoBehaviour
             Debug.Log("小当たり");
             _smallHitVideo[_listNumber].loopPointReached += ImageActiveTure;
             _smallHitVideo[_listNumber].Play();
-            _scoreManager.GetScore(50);            
-            _scoreText.text = _scoreManager.AllScore.ToString();
-            // BallInstantiate();
+            _scoreManager.GetScore(50);
+            // _scoreManager.AddScore(50);
+            _uiManager.ScoreText.text = _scoreManager.AllScore.ToString();
+            _uiManager.BigHitText.text = _scoreManager.AllScore.ToString();
+            BallInstantiate();
         }
     }
 
@@ -71,8 +74,11 @@ public class Video : MonoBehaviour
         Debug.Log("固定当たり");
         _smallHitVideo[_listNumber].loopPointReached += ImageActiveTure;
         _smallHitVideo[_listNumber].Play();
-        _scoreManager.GetScore(15);            
-        _scoreText.text = _scoreManager.AllScore.ToString();
+        _scoreManager.GetScore(15);
+        // _scoreManager.AddScore(15);
+        _uiManager.ScoreText.text = _scoreManager.AllScore.ToString();
+        _uiManager.BigHitText.text = _scoreManager.AllScore.ToString();
+        BallInstantiate();
     }
 
     /// <summary>
@@ -82,7 +88,7 @@ public class Video : MonoBehaviour
     {
         for (int i = 0; i < _scoreManager.AllScore; i++)
         {
-            _getBall.RandomPositionInstantiate();
+            instantiateBall.RandomPositionInstantiate();
         }
     }
 

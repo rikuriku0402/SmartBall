@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GetBall : MonoBehaviour
+public class InstantiateBall : MonoBehaviour
 {
     [SerializeField]
     [Header("ボールのブレハブ")]
@@ -20,8 +20,17 @@ public class GetBall : MonoBehaviour
     [Header("ボールの親オブジェクト")]
     private Transform _ballParentObject;
     
-    
+    [SerializeField]
+    [Header("ボール生成位置")]
+    private Transform _ballGeneratePos;
 
+    [SerializeField]
+    [Header("何球に設定するか")]
+    private int _ballCount;
+
+    [SerializeField]
+    [Header("")]
+    private TensionRod _tensionRod;
     public void RandomPositionInstantiate()
     {
             // rangeAとrangeBのx座標の範囲内でランダムな数値を作成
@@ -33,5 +42,23 @@ public class GetBall : MonoBehaviour
 
             // GameObjectを上記で決まったランダムな場所に生成
             Instantiate(_ball, new Vector3(x,y,z), _ball.transform.rotation, _ballParentObject);
+    }
+    
+    public void GenerationBall()
+    {
+        if (_ballCount == 0)
+        {
+            Debug.Log("玉なし");
+            _ball.SetActive(false);
+            return;
+        }
+        else
+        {           
+            Debug.Log("玉あり");
+            _ballCount--;
+            _ball.transform.position = _ballGeneratePos.position;
+            _tensionRod.CoolTime(false);
+            _ball.SetActive(true);
+        }
     }
 }

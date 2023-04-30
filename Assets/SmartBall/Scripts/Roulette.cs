@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Roulette : MonoBehaviour,IRouletteeble
+public class Roulette : MonoBehaviour, IRouletteAble
 {
     [SerializeField]
     [Header("はずれやリーチやあたりの動画が入ってるクラス")]
