@@ -19,6 +19,6 @@ public class Ball : MonoBehaviour
         // x軸方向の移動範囲制限
         pos.y = Mathf.Clamp(pos.y, _minY, _maxY);
         transform.position = pos;
-
+        
     }
 }
