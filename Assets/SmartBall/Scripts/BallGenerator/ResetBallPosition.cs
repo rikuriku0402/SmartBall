@@ -18,6 +18,10 @@ public class BallGenerator : MonoBehaviour
     [SerializeField]
     [Header("ボール生成位置")]
     private Transform _ballGeneratePos;
+
+    [SerializeField]
+    [Header("何球に設定するか")]
+    private int _ballCount;
     
     void Start()
     {
@@ -26,7 +30,17 @@ public class BallGenerator : MonoBehaviour
 
     private void BallGeneratorButton()
     {
-        _ball.transform.position = _ballGeneratePos.position;
-        _ball.SetActive(true);
+        _ballCount--;
+        if (_ballCount == 0)
+        {
+            _ballCount = 0;
+            Debug.Log("玉なし");
+            return;
+        }
+        else
+        {
+            _ball.transform.position = _ballGeneratePos.position;
+            _ball.SetActive(true);
+        }
     }
 }

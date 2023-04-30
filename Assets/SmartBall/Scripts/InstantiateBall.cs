@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class GetBall : MonoBehaviour
 {
@@ -34,6 +32,6 @@ public class GetBall : MonoBehaviour
             float z = Random.Range(_position1.position.z, _position2.position.z);
 
             // GameObjectを上記で決まったランダムな場所に生成
-            Instantiate(_ball, new Vector3(x,y,z), _ball.transform.rotation,_ballParentObject);
+            Instantiate(_ball, new Vector3(x,y,z), _ball.transform.rotation, _ballParentObject);
     }
 }
