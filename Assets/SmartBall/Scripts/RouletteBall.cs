@@ -6,9 +6,9 @@ using UnityEngine;
 
 public class RouletteBall : MonoBehaviour
 {
-    private async void OnTriggerEnter(Collider other)
+    private async void OnCollisionEnter(Collision collision)
     {
-        if (other.TryGetComponent(out IRouletteAble roulette))
+        if (collision.gameObject.TryGetComponent(out IRouletteAble roulette))
         {
             roulette.RouletStart();
             // await BallActiveFalse(gameObject);
