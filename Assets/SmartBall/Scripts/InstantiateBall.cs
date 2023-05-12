@@ -1,12 +1,18 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class InstantiateBall : MonoBehaviour
 {
     [SerializeField]
-    [Header("ボールのブレハブ")]
+    [Header("生成するボールのプレハブ")]
     private GameObject _ball;
+    
+    [SerializeField]
+    [Header("再利用するボール")]
+    private GameObject _recycleBall;
     
     [SerializeField]
     [Header("生成する範囲1")]
@@ -29,8 +35,15 @@ public class InstantiateBall : MonoBehaviour
     private int _ballCount;
 
     [SerializeField]
-    [Header("")]
-    private TensionRod _tensionRod;
+    [Header("UIManager")]
+    private UIManager _uiManager;
+
+
+    private void Start()
+    {
+        _uiManager.NowBallCountText.text = _ballCount.ToString();
+    }
+
     public void RandomPositionInstantiate()
     {
             // rangeAとrangeBのx座標の範囲内でランダムな数値を作成
@@ -49,16 +62,16 @@ public class InstantiateBall : MonoBehaviour
         if (_ballCount == 0)
         {
             Debug.Log("玉なし");
-            _ball.SetActive(false);
+            _recycleBall.SetActive(false);
             return;
         }
         else
         {           
             Debug.Log("玉あり");
             _ballCount--;
-            _ball.transform.position = _ballGeneratePos.position;
-            _tensionRod.CoolTime(false);
-            _ball.SetActive(true);
+            _recycleBall.transform.position = _ballGeneratePos.position;
+            _recycleBall.SetActive(true);
+            _uiManager.NowBallCountText.text = _ballCount.ToString();
         }
     }
 }

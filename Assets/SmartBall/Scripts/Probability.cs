@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Probability : MonoBehaviour
+public class Probability
 {
-    public static bool RouletteProbability(float percent)
+    public static bool RouletteProbability(int percent)
     {
-        float probabilityRate = UnityEngine.Random.value * 100.0f;
+        int probabilityRate = (int)Random.value * 100;
 
-        if (percent == 100.0f && probabilityRate == percent)
+        if (percent == 100 && probabilityRate == percent)
         {
             return true;
         }

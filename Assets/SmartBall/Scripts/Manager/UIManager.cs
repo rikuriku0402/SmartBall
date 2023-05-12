@@ -7,20 +7,28 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-    public TextMeshPro BigHitText => _bigHitText;
+    public TMP_Text BigHitText => _bigHitText;
     
-    public TextMeshProUGUI ScoreText => _scoreText;
+    public TMP_Text[] SmallHitText => _smallHitText;
+    
+    public TMP_Text NowBallCountText => _nowBallCountText;
+    
+    public TMP_Text ScoreText => _scoreText;
     
     [SerializeField]
     [Header("大当たりテキスト")]
-    private TextMeshPro _bigHitText;
+    private TMP_Text _bigHitText;
+    
+    [SerializeField]
+    [Header("小当たりテキスト")]
+    private TMP_Text[] _smallHitText;
     
     [SerializeField]
     [Header("今の玉の数テキスト")]
-    private TextMeshProUGUI _nowBallCountText;
+    private TMP_Text _nowBallCountText;
     
     [SerializeField]
     [Header("スコア")]
-    private TextMeshProUGUI _scoreText;
+    private TMP_Text _scoreText;
 
 }

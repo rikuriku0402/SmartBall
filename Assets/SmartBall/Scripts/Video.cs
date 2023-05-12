@@ -15,7 +15,7 @@ public class Video : MonoBehaviour
     private List<VideoPlayer> _bigHitVideo;
 
     [SerializeField]
-    [Header("大当たりの確率")]
+    [Header("大当たりの確率それ以外は小当たり")]
     private int _bigHitProbability;
     
     [SerializeField]
@@ -25,15 +25,7 @@ public class Video : MonoBehaviour
     [SerializeField]
     [Header("ScoreManager")]
     private ScoreManager _scoreManager;
-    
-    [SerializeField]
-    [Header("UIManager")]
-    private UIManager _uiManager;
-    
-    [SerializeField]
-    [Header("ボールを生成するクラス")]
-    private InstantiateBall instantiateBall;
-    
+
     private int _listNumber;
     
     
@@ -47,11 +39,7 @@ public class Video : MonoBehaviour
             Debug.Log("大当たり");
             _bigHitVideo[_listNumber].loopPointReached += ImageActiveTure;
             _bigHitVideo[_listNumber].Play();
-            _scoreManager.GetScore(100);
-            // _scoreManager.AddScore(100);
-            _uiManager.ScoreText.text = _scoreManager.AllScore.ToString();
-            _uiManager.BigHitText.text = _scoreManager.AllScore.ToString();
-            BallInstantiate();
+            _scoreManager.BigHit();
         }
         else
         {
@@ -59,11 +47,7 @@ public class Video : MonoBehaviour
             Debug.Log("小当たり");
             _smallHitVideo[_listNumber].loopPointReached += ImageActiveTure;
             _smallHitVideo[_listNumber].Play();
-            _scoreManager.GetScore(50);
-            // _scoreManager.AddScore(50);
-            _uiManager.ScoreText.text = _scoreManager.AllScore.ToString();
-            _uiManager.BigHitText.text = _scoreManager.AllScore.ToString();
-            BallInstantiate();
+            _scoreManager.BigHit();
         }
     }
 
@@ -74,23 +58,9 @@ public class Video : MonoBehaviour
         Debug.Log("固定当たり");
         _smallHitVideo[_listNumber].loopPointReached += ImageActiveTure;
         _smallHitVideo[_listNumber].Play();
-        _scoreManager.GetScore(15);
-        // _scoreManager.AddScore(15);
-        _uiManager.ScoreText.text = _scoreManager.AllScore.ToString();
-        _uiManager.BigHitText.text = _scoreManager.AllScore.ToString();
-        BallInstantiate();
+        _scoreManager.SmallHit();
     }
-
-    /// <summary>
-    /// ボールを生成する関数
-    /// </summary>
-    private void BallInstantiate()
-    {
-        for (int i = 0; i < _scoreManager.AllScore; i++)
-        {
-            instantiateBall.RandomPositionInstantiate();
-        }
-    }
+    
 
     /// <summary>
     /// VideoPlayerの再生が終わった後に呼ばれる

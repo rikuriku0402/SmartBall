@@ -9,21 +9,22 @@ public class ResetBall : MonoBehaviour
     [Header("ボールを再生成するクラス")]
     private InstantiateBall _instantiateBall;
     
+    [SerializeField]
+    [Header("")]
+    private TensionRod _tensionRod;
+    
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Ball")
         {
-            Debug.Log("呼ばれた");
+            Debug.Log("コリジョン");
+            _tensionRod.CoolTime(false);
             _instantiateBall.GenerationBall();
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Ball")
-        {
-            Debug.Log("呼ばれた");
-            _instantiateBall.GenerationBall();
-        }
+        _tensionRod.CoolTime(false);
     }
 }
