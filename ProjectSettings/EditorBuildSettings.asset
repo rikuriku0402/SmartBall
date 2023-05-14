@@ -4,8 +4,5 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/SmartBall/Scenes/Main.unity
-    guid: 3822645024c621440b317047b3313830
+  m_Scenes: []
   m_configObjects: {}
