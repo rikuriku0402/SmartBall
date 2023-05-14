@@ -42,12 +42,12 @@ public class TensionRod : MonoBehaviour
             .Subscribe(_ => Limit())
             .AddTo(this);
         
-        CoolTime(false);
+        //CoolTime(false);
     }
 
     public void Drag()
     {
-        _clickingTime += Time.deltaTime * -4;
+        _clickingTime += Time.deltaTime * -5;
         Move();
     }
 
@@ -60,23 +60,23 @@ public class TensionRod : MonoBehaviour
     {
         var pos = gameObject.transform.position;
         
-        Limit();
-        transform.DOMove(new Vector3(pos.x, _clickingTime, pos.z), 0.5f);
+        transform.DOMove(new Vector3(pos.x, _clickingTime, pos.z), 0.1f);
     }
 
     public async void Shot()
     {
         await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
-        transform.DOMove(_currentPos, 0.5f)
+        transform
+            .DOMove(_currentPos, 0.5f)
             .SetEase(Ease.OutBounce);
         
         if (_coolTime == false)
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(0.2f));
+            await UniTask.Delay(TimeSpan.FromSeconds(0.1f));
             _rd.AddForce(new Vector3(0,_clickingTime * -_power, 0), ForceMode.Impulse);
         }
         _clickingTime = 0;
-        CoolTime(true);
+        //CoolTime(true);
     }
 
     public void Limit()
