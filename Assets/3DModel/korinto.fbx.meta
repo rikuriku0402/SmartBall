@@ -3,7 +3,17 @@ guid: d820ca01d388f4244a985aa2b49728db
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: hontai1
+    second: {fileID: 2100000, guid: e5428ee0d6b2b57449ce8ba047f2b103, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: tyoutin1
+    second: {fileID: 2100000, guid: 874943d58f20fb34c93227f54426fc92, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
