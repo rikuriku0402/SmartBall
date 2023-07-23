@@ -9,10 +9,6 @@ public class InstantiateBall : MonoBehaviour
     private GameObject _ball;
     
     [SerializeField]
-    [Header("再利用するボール")]
-    private GameObject _recycleBall;
-    
-    [SerializeField]
     [Header("生成する範囲1")]
     private Transform _position1;
     
@@ -60,15 +56,15 @@ public class InstantiateBall : MonoBehaviour
         if (_ballCount == 0)
         {
             Debug.Log("玉なし");
-            _recycleBall.SetActive(false);
+            _ball.SetActive(false);
             return;
         }
         else
         {           
             Debug.Log("玉あり");
             _ballCount--;
-            _recycleBall.transform.position = _ballGeneratePos.position;
-            _recycleBall.SetActive(true);
+            _ball.transform.position = _ballGeneratePos.position;
+            _ball.SetActive(true);
             _uiManager.NowBallCountText.text = _ballCount.ToString();
         }
     }
