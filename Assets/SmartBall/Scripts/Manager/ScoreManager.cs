@@ -1,11 +1,12 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading;
+using Cysharp.Threading.Tasks;
 
 public class ScoreManager : MonoBehaviour
 {
-    public int AllScore => _allScore;
-    
     private int _allScore;
     
     [SerializeField]
@@ -23,10 +24,17 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     [Header("ボールを生成するクラス")]
     private InstantiateBall instantiateBall;
+    
+    [SerializeField]
+    [Header("クリアするためのスコアの上限")]
+    private int _clearScore;
 
+    
 
     private void Start()
     {
+        DontDestroyOnLoad(this);
+        
         _uiManager.BigHitText.text = _bigHit.ToString();
 
         for (int i = 0; i < _uiManager.SmallHitText.Length; i++)
@@ -35,44 +43,42 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public int BigHit()
+    public async void BigHit()
     {
         _allScore += _bigHit;
         Debug.Log(_allScore);
         _uiManager.ScoreText.text = _allScore.ToString();
-        BallInstantiate();
-        return _allScore;
+        PlayerPrefs.SetInt("SCORE", _allScore);
+
+        if (_allScore >= _clearScore)
+        {
+            GameManager.IsGame = true;
+            await GameClearAsync();
+        }
     }
 
-    public int SmallHit()
+    public async void SmallHit()
     {
         _allScore += _smallHit;        
         Debug.Log(_allScore);
         _uiManager.ScoreText.text = _allScore.ToString();
-        BallInstantiate();
-        return _allScore;
-    }
-    
-    public void MinusScore(int currentScore)
-    {
-        if (currentScore == 0)
+        PlayerPrefs.SetInt("SCORE", _allScore);
+        
+        if (_allScore >= _clearScore)
         {
-            Debug.Log("金ないやんけ");
-            return;
+            GameManager.IsGame = true;
+            await GameClearAsync();
+        }
+    }
+
+    private async UniTask GameClearAsync()
+    {
+        if (GameManager.IsGame)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
+            SceneLoader.SceneChange("ClearScene"); 
+            Debug.Log("ゲームクリア");
         }
         
-        currentScore -= 1;
-        _allScore = currentScore;
-    }
-    
-    /// <summary>
-    /// ボールを生成する関数
-    /// </summary>
-    private void BallInstantiate()
-    {
-        for (int i = 0; i < _allScore; i++)
-        {
-            instantiateBall.RandomPositionInstantiate();
-        }
     }
 }
