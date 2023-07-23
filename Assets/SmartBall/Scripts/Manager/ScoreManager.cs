@@ -52,6 +52,7 @@ public class ScoreManager : MonoBehaviour
 
         if (_allScore >= _clearScore)
         {
+            GameManager.IsGame = true;
             await GameClearAsync();
         }
     }
@@ -65,14 +66,19 @@ public class ScoreManager : MonoBehaviour
         
         if (_allScore >= _clearScore)
         {
+            GameManager.IsGame = true;
             await GameClearAsync();
         }
     }
 
     private async UniTask GameClearAsync()
     {
-        await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
-        SceneLoader.SceneChange("ClearScene");
-        Debug.Log("ゲームクリア");
+        if (GameManager.IsGame)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
+            SceneLoader.SceneChange("ClearScene"); 
+            Debug.Log("ゲームクリア");
+        }
+        
     }
 }
