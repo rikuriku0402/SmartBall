@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 15d7dce0e9b250948a2ee547820832a1
+guid: b7012ede16b034f4f8bc22776fe7ffc0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 2094, y: 3240, z: 2094, w: 193}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 0
@@ -102,6 +102,18 @@ TextureImporter:
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
     buildTarget: iPhone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -117,26 +129,22 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: SL_022420_28400_02_0
+      name: Pink
       rect:
         serializedVersion: 2
-        x: 296
-        y: 2682
-        width: 1662
-        height: 468
-      alignment: 9
+        x: 223
+        y: 2608
+        width: 1796
+        height: 608
+      alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
-      outline:
-      - - {x: -831, y: 234}
-        - {x: -831, y: -233.61761}
-        - {x: 831, y: -233.61761}
-        - {x: 831, y: 234}
+      outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 15535cebfcbd75740ad1fda3ee84410b
-      internalID: 649730028
+      spriteID: 2c2b704895b64d34aa5e0130e36e26a5
+      internalID: -877911657
       vertices: []
       indices: 
       edges: []
@@ -144,15 +152,15 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: c1405bb8c0a4d854283b2d5f9b7c12bd
-    internalID: 0
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 1537655665
     vertices: []
     indices: 
     edges: []
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      SL_022420_28400_02_0: 1918328725
+      Pink: -877911657
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

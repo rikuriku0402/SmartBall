@@ -51,7 +51,7 @@ public class InstantiateBall : MonoBehaviour
     {
         if (!GameManager.IsGame)
         {
-            _uiManager.GameText.text = "ゲームオーバー!!";
+            _uiManager.GameText.text = "GameOver!!";
             await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
             SceneLoader.SceneChange("TitleScene"); 
             Debug.Log("GameOver!!");
