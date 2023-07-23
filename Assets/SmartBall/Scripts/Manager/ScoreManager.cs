@@ -75,6 +75,7 @@ public class ScoreManager : MonoBehaviour
     {
         if (GameManager.IsGame)
         {
+            _uiManager.GameText.text = "GameClear!!";
             await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
             SceneLoader.SceneChange("ClearScene"); 
             Debug.Log("ゲームクリア");
