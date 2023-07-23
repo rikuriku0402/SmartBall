@@ -51,7 +51,7 @@ public class ScoreManager : MonoBehaviour
         _allScore += _bigHit;
         Debug.Log(_allScore);
         _uiManager.ScoreText.text = _allScore.ToString();
-        BallInstantiate();
+        PlayerPrefs.SetInt("SCORE", _allScore);
 
         if (_allScore >= _clearScore)
         {
@@ -67,7 +67,7 @@ public class ScoreManager : MonoBehaviour
         _allScore += _smallHit;        
         Debug.Log(_allScore);
         _uiManager.ScoreText.text = _allScore.ToString();
-        BallInstantiate();
+        PlayerPrefs.SetInt("SCORE", _allScore);
         
         if (_allScore >= _clearScore)
         {
@@ -76,18 +76,6 @@ public class ScoreManager : MonoBehaviour
         }
 
         return _allScore;
-    }
-    
-    public void MinusScore(int currentScore)
-    {
-        if (currentScore == 0)
-        {
-            Debug.Log("玉ないやんけ");
-            return;
-        }
-        
-        currentScore -= 1;
-        _allScore = currentScore;
     }
     
     /// <summary>

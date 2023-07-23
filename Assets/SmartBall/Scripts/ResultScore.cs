@@ -13,7 +13,7 @@ public class ResultScore : MonoBehaviour
     
     void Start()
     {
-        int allScore = FindObjectOfType<ScoreManager>().AllScore;
+        int allScore = PlayerPrefs.GetInt("SCORE");;
         _scoreText.text = allScore.ToString();
     }
 }
