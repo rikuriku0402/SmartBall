@@ -4,5 +4,20 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/SmartBall/Scenes/TitleScene.unity
+    guid: d4f1cd16fff7a6943ab14a60eaf1e0de
+  - enabled: 1
+    path: Assets/SmartBall/Scenes/Stage1.unity
+    guid: 4f7d614cc2b94004db3dd2cf667bf41f
+  - enabled: 1
+    path: Assets/SmartBall/Scenes/Stage2.unity
+    guid: d89cc0a9dcba17b4891de1f4835626ac
+  - enabled: 1
+    path: Assets/SmartBall/Scenes/Stage3.unity
+    guid: b204cccc9db54674cb204e4ec28d8d00
+  - enabled: 1
+    path: Assets/SmartBall/Scenes/ClearScene.unity
+    guid: b425a1492980e5049bfd8c1800235fc1
   m_configObjects: {}

@@ -33,6 +33,9 @@ public class TensionRod : MonoBehaviour
     [SerializeField]
     private bool _coolTime;
     
+    [SerializeField]
+    private float _minusPower;
+    
     private void Start()
     {
         _rd = _ball.GetComponent<Rigidbody>();
@@ -47,7 +50,7 @@ public class TensionRod : MonoBehaviour
 
     public void Drag()
     {
-        _clickingTime += Time.deltaTime * -4;
+        _clickingTime += Time.deltaTime * -_minusPower;
         Move();
     }
 

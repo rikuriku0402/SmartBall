@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 public class InstantiateBall : MonoBehaviour
@@ -19,20 +21,20 @@ public class InstantiateBall : MonoBehaviour
     [SerializeField]
     [Header("UIManager")]
     private UIManager _uiManager;
-
-
+    
     private void Start()
     {
         _uiManager.NowBallCountText.text = _ballCount.ToString();
     }
 
     
-    public void GenerationBall()
+    public async void GenerationBall()
     {
         if (_ballCount == 0)
         {
             Debug.Log("玉なし");
             _ball.SetActive(false);
+            await GameClearAsync();
             return;
         }
         else
@@ -43,5 +45,16 @@ public class InstantiateBall : MonoBehaviour
             _ball.SetActive(true);
             _uiManager.NowBallCountText.text = _ballCount.ToString();
         }
+    }
+    
+    private async UniTask GameClearAsync()
+    {
+        if (!GameManager.IsGame)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
+            SceneLoader.SceneChange("TitleScene"); 
+            Debug.Log("ゲームオーバー");
+        }
+        
     }
 }
