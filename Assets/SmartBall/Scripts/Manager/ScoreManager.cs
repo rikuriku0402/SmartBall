@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading;
+using Cysharp.Threading.Tasks;
 
 public class ScoreManager : MonoBehaviour
 {
@@ -46,7 +49,7 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public int BigHit()
+    public async void BigHit()
     {
         _allScore += _bigHit;
         Debug.Log(_allScore);
@@ -55,14 +58,11 @@ public class ScoreManager : MonoBehaviour
 
         if (_allScore >= _clearScore)
         {
-            SceneLoader.SceneChange("ClearScene");
-            Debug.Log("ゲームクリア");
+            await GameClearAsync();
         }
-        
-        return _allScore;
     }
 
-    public int SmallHit()
+    public async void SmallHit()
     {
         _allScore += _smallHit;        
         Debug.Log(_allScore);
@@ -71,11 +71,15 @@ public class ScoreManager : MonoBehaviour
         
         if (_allScore >= _clearScore)
         {
-            SceneLoader.SceneChange("ClearScene");
-            Debug.Log("ゲームクリア");
+            await GameClearAsync();
         }
+    }
 
-        return _allScore;
+    private async UniTask GameClearAsync()
+    {
+        await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
+        SceneLoader.SceneChange("ClearScene");
+        Debug.Log("ゲームクリア");
     }
     
     /// <summary>
