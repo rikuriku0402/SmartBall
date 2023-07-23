@@ -7,14 +7,8 @@ using Cysharp.Threading.Tasks;
 
 public class ScoreManager : MonoBehaviour
 {
-    public int AllScore => _allScore;
-    
     private int _allScore;
     
-    [SerializeField]
-    [Header("ボールを生成するかのフラグ")]
-    private bool _isInstantiateBall;
-
     [SerializeField]
     [Header("大当たりをどのくらい増やすか")]
     private int _bigHit;
@@ -80,23 +74,5 @@ public class ScoreManager : MonoBehaviour
         await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
         SceneLoader.SceneChange("ClearScene");
         Debug.Log("ゲームクリア");
-    }
-    
-    /// <summary>
-    /// ボールを生成する関数
-    /// </summary>
-    private void BallInstantiate()
-    {
-        if (!_isInstantiateBall)
-        {
-            for (int i = 0; i < _allScore; i++)
-            {
-                instantiateBall.RandomPositionInstantiate();
-            }
-        }
-        else
-        {
-            Debug.Log("ボールは生成しない");
-        }
     }
 }
