@@ -15,6 +15,8 @@ public class UIManager : MonoBehaviour
     
     public TMP_Text ScoreText => _scoreText;
     
+    public TMP_Text GameText => _gameText;
+    
     [SerializeField]
     [Header("大当たりテキスト")]
     private TMP_Text _bigHitText;
@@ -30,5 +32,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     [Header("スコア")]
     private TMP_Text _scoreText;
+    
+    [SerializeField]
+    [Header("ゲームオーバー、ゲームクリアテキスト")]
+    private TMP_Text _gameText;
 
 }
