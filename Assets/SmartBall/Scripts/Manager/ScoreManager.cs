@@ -9,6 +9,10 @@ public class ScoreManager : MonoBehaviour
     private int _allScore;
     
     [SerializeField]
+    [Header("ボールを生成するかのフラグ")]
+    private bool _isInstantiateBall;
+
+    [SerializeField]
     [Header("大当たりをどのくらい増やすか")]
     private int _bigHit;
     
@@ -23,10 +27,17 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     [Header("ボールを生成するクラス")]
     private InstantiateBall instantiateBall;
+    
+    [SerializeField]
+    [Header("クリアするためのスコアの上限")]
+    private int _clearScore;
 
+    
 
     private void Start()
     {
+        DontDestroyOnLoad(this);
+        
         _uiManager.BigHitText.text = _bigHit.ToString();
 
         for (int i = 0; i < _uiManager.SmallHitText.Length; i++)
@@ -41,6 +52,13 @@ public class ScoreManager : MonoBehaviour
         Debug.Log(_allScore);
         _uiManager.ScoreText.text = _allScore.ToString();
         BallInstantiate();
+
+        if (_allScore >= _clearScore)
+        {
+            SceneLoader.SceneChange("ClearScene");
+            Debug.Log("ゲームクリア");
+        }
+        
         return _allScore;
     }
 
@@ -50,6 +68,13 @@ public class ScoreManager : MonoBehaviour
         Debug.Log(_allScore);
         _uiManager.ScoreText.text = _allScore.ToString();
         BallInstantiate();
+        
+        if (_allScore >= _clearScore)
+        {
+            SceneLoader.SceneChange("ClearScene");
+            Debug.Log("ゲームクリア");
+        }
+
         return _allScore;
     }
     
@@ -57,7 +82,7 @@ public class ScoreManager : MonoBehaviour
     {
         if (currentScore == 0)
         {
-            Debug.Log("金ないやんけ");
+            Debug.Log("玉ないやんけ");
             return;
         }
         
@@ -70,9 +95,16 @@ public class ScoreManager : MonoBehaviour
     /// </summary>
     private void BallInstantiate()
     {
-        for (int i = 0; i < _allScore; i++)
+        if (!_isInstantiateBall)
         {
-            instantiateBall.RandomPositionInstantiate();
+            for (int i = 0; i < _allScore; i++)
+            {
+                instantiateBall.RandomPositionInstantiate();
+            }
+        }
+        else
+        {
+            Debug.Log("ボールは生成しない");
         }
     }
 }
