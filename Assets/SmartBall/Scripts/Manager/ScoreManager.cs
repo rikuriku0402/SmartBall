@@ -1,17 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cysharp.Threading;
+using Cysharp.Threading.Tasks;
 
 public class ScoreManager : MonoBehaviour
 {
-    public int AllScore => _allScore;
-    
     private int _allScore;
     
-    [SerializeField]
-    [Header("ボールを生成するかのフラグ")]
-    private bool _isInstantiateBall;
-
     [SerializeField]
     [Header("大当たりをどのくらい増やすか")]
     private int _bigHit;
@@ -46,7 +43,7 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    public int BigHit()
+    public async void BigHit()
     {
         _allScore += _bigHit;
         Debug.Log(_allScore);
@@ -55,14 +52,11 @@ public class ScoreManager : MonoBehaviour
 
         if (_allScore >= _clearScore)
         {
-            SceneLoader.SceneChange("ClearScene");
-            Debug.Log("ゲームクリア");
+            await GameClearAsync();
         }
-        
-        return _allScore;
     }
 
-    public int SmallHit()
+    public async void SmallHit()
     {
         _allScore += _smallHit;        
         Debug.Log(_allScore);
@@ -71,28 +65,14 @@ public class ScoreManager : MonoBehaviour
         
         if (_allScore >= _clearScore)
         {
-            SceneLoader.SceneChange("ClearScene");
-            Debug.Log("ゲームクリア");
+            await GameClearAsync();
         }
-
-        return _allScore;
     }
-    
-    /// <summary>
-    /// ボールを生成する関数
-    /// </summary>
-    private void BallInstantiate()
+
+    private async UniTask GameClearAsync()
     {
-        if (!_isInstantiateBall)
-        {
-            for (int i = 0; i < _allScore; i++)
-            {
-                instantiateBall.RandomPositionInstantiate();
-            }
-        }
-        else
-        {
-            Debug.Log("ボールは生成しない");
-        }
+        await UniTask.Delay(TimeSpan.FromSeconds(1.5f));
+        SceneLoader.SceneChange("ClearScene");
+        Debug.Log("ゲームクリア");
     }
 }
