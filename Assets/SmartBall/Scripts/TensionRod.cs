@@ -56,7 +56,7 @@ public class TensionRod : MonoBehaviour
         Shot();
     }
 
-    public void Move()
+    private void Move()
     {
         var pos = gameObject.transform.position;
         
@@ -64,7 +64,7 @@ public class TensionRod : MonoBehaviour
         transform.DOMove(new Vector3(pos.x, _clickingTime, pos.z), 0.5f);
     }
 
-    public async void Shot()
+    private async void Shot()
     {
         await UniTask.Delay(TimeSpan.FromSeconds(0.5f));
         transform.DOMove(_currentPos, 0.5f)
@@ -79,7 +79,7 @@ public class TensionRod : MonoBehaviour
         CoolTime(true);
     }
 
-    public void Limit()
+    private void Limit()
     {
         //y軸方向の移動範囲制限
         _clickingTime = Mathf.Clamp(_clickingTime, _minY, _maxY);

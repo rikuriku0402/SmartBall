@@ -31,8 +31,7 @@ public class InstantiateBall : MonoBehaviour
     [SerializeField]
     [Header("UIManager")]
     private UIManager _uiManager;
-
-
+    
     private void Start()
     {
         _uiManager.NowBallCountText.text = _ballCount.ToString();

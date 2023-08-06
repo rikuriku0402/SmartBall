@@ -24,6 +24,6 @@ public class ResetBall : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        _tensionRod.CoolTime(false);
+       //_tensionRod.CoolTime(false);
     }
 }
